@@ -1,0 +1,41 @@
+:root {
+    --clr-primary-200: ;
+    --clr-primary-500: ;
+
+    --clr-neutral-000: #ffffff;
+    --clr-neutral-100: ;
+    --clr-neutral-900: ;
+    --clr-neutral-999: #000000;
+    
+    --clr-btn-700: ;
+    --clr-btn-400: ;
+
+    --clr-gradient-300: ;
+    --clr-gradient-700: ;
+
+    --ff-primary: 'Zen Maru Gothic', sans-serif;
+
+    --ff-body: var(--ff-primary);
+    --ff-heading: var(--ff-primary);
+
+    --fs-300: 12px;
+    --fs-400: 14px;
+    --fs-500: 16px;
+    --fs-600: 18px;
+    --fs-650: 20px;
+    --fs-700: 24px;
+    --fs-800: 28px;
+
+    --fw-regular: 400;
+    --fw-semi-bold: 500;
+    --fw-bold: 700;
+}
+
+body {
+    line-height: 1.5;
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    color: var(--clr-neutral-900);
+    background: var(--clr-neutral-100);
+}
+
