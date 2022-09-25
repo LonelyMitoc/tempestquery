@@ -11,25 +11,31 @@
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-  <heading class="text-center">
+  <header class="header | text-center pb-2">
     <h1>Weather Dashboard</h1>
-    <p id="date-time"></p>
-  </heading>
+    <p id="date-time" class="fw-bold fs-600"></p>
+  </header>
+
   <div class="container">
     <div class="row">
-      <div class="search-container | col-12 col-lg-3 bg-light p-2 mr-3">
-        <h2 class="search-heading">Search By City</h2>
+      <div class="search-container | col-12 col-lg-3 p-2 mr-3">
+        <h2 class="search-heading | text-neutral-900">Search By City</h2>
         <form id="search-form">
-          <input id="search-input" class="form-input | form-control" type="text" placeholder="City Name" aria-label="input city search">
+          <input id="search-input" class="form-input | form-control" type="text" placeholder="City Name" aria-label="input box for city name to search">
           <div class="d-grid gap-2">
-            <button id="search-btn" class="btn btn-primary | mt-1" type="button">Search</button>
+            <button id="search-btn" class="btn btn-secondary | mt-1 bg-btn-400" type="button">Search</button>
           </div>
         </form>
+
+        <div id="search-history"></div>
+
       </div>
 
-      <div class="col-12 col-lg-8 bg-light ms-auto p-2">
-        <h2>Showing results for <span id="result-text"></span></h2>
+      <div class="col-12 col-lg-8 ms-auto p-2">
+        <h2 class="text-neutral-900">Showing results for <span id="result-text"></span></h2>
         <div id="result-content"></div>
+          <section id="current-weather" class="hidden"></section>
+          <section id="future-weather" class="hidden"></section>
       </div>
     </div>
   </div>

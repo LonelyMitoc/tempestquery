@@ -3,12 +3,12 @@
     --clr-primary-500: ;
 
     --clr-neutral-000: #ffffff;
-    --clr-neutral-100: ;
-    --clr-neutral-900: ;
+    --clr-neutral-100: #eeeeee;
+    --clr-neutral-900: #030030;
     --clr-neutral-999: #000000;
     
-    --clr-btn-700: ;
-    --clr-btn-400: ;
+    --clr-btn-400: #008fac;
+    --clr-btn-700: #0a3d47;
 
     --clr-gradient-300: #206c7c;
     --clr-gradient-700: #e36049;
@@ -39,3 +39,103 @@ body {
     background: var(--clr-neutral-100);
 }
 
+.text-primary-200 {
+    color: var(--clr-primary-200);
+}
+
+.text-primary-500 {
+    color: var(--clr-primary-500);
+}
+
+.text-neutral-900 {
+    color: var(--clr-neutral-900);
+}
+
+.text-neutral-100 {
+    color: var(--clr-neutral-100);
+}
+
+
+.bg-primary-200 {
+    background-color: var(--clr-primary-200);
+}
+
+.bg-primary-500 {
+    background-color: var(--clr-primary-500);
+}
+
+.bg-neutral-900 {
+    background-color: var(--clr-neutral-900);
+}
+
+.bg-neutral-100 {
+    background-color: var(--clr-neutral-100);
+}
+
+.bg-btn-400 {
+    background-color: var(--clr-btn-400);
+}
+
+.bg-btn-700 {
+    background-color: var(--clr-btn-700);
+}
+
+.fw-regular {
+    font-weight: var(--fw-regular);
+}
+
+.fw-semi-bold {
+    font-weight: var(--fw-semi-bold);
+}
+
+.fw-bold {
+    font-weight: var(--fw-bold);
+}
+
+
+.fs-primary-heading {
+    font-size: var(--fs-primary-heading);
+}
+
+.fs-secondary-heading {
+    font-size: var(--fs-secondary-heading);
+}
+
+
+.fs-300 {
+    font-size: var(--fs-300);
+}
+
+.fs-400 {
+    font-size: var(--fs-400);
+}
+
+.fs-500 {
+    font-size: var(--fs-500);
+}
+
+.fs-600 {
+    font-size: var(--fs-600);
+}
+
+.fs-650 {
+    font-size: var(--fs-650);
+}
+
+.fs-700 {
+    font-size: var(--fs-700);
+}
+
+.fs-800 {
+    font-size: var(--fs-800);
+}
+
+.header {
+    background-color: transparent;
+    background: var(--clr-gradient-300);
+    background: radial-gradient(circle, var(--clr-gradient-700) 10%, var(--clr-gradient-300) 100%);
+}
+
+.btn {
+    width: 100%;
+}

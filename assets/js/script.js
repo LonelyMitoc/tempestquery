@@ -22,6 +22,26 @@ function perMinuteInterval () {
     renderDateTime();
 };
 
-renderDateTime();
 perMinuteInterval();
 
+// API Information
+var APIKey = '8a622b07b60d853679b1d9c7d914148d';
+var rawCityData = {};
+var currentInfo = {};
+var futureInfo = {};
+
+// User Input and other variables
+var cityInput = document.getElementById('search-input');
+var submitBtn = document.getElementById('search-btn');
+var cityHistory = document.getElementById('search-history');
+
+var previousSearch = [];
+var city;
+var cityName;
+
+function pushCityHistory () {
+    var newLi = document.createElement('li');
+    var historyBtn = document.createElement('button');
+    cityHistory.appendChild(newLi);
+    newLi.appendChild
+}
