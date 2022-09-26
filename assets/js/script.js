@@ -84,16 +84,27 @@ var previousSearch = [];
 var cityName;
 
 function pushCityHistory () {
+    // Create list and button element for the search history
     var newLi = document.createElement('li');
     var historyBtn = document.createElement('button');
+
+    // Add the elements to the appropriate section
     cityHistory.appendChild(newLi);
     newLi.appendChild(historyBtn);
+
+    // Set the values for the cityName to the input so we can add them to a previous search list
     cityName = cityInput.value;
-    historyBtn.classList.add('btn', 'btn-secondary')
     previousSearch.push(cityName);
+
+    // Replace the text on the button to the current cityName and add classes to the button
     historyBtn.textContent = cityName;
+    historyBtn.classList.add('btn', 'btn-secondary');
+
+    // Save the cityName to local storage so we can pull it out later
     localStorage.setItem("city", JSON.stringify(previousSearch));
     localStorage.getItem("city");
+
+    // Eventlistener for the button
     historyBtn.addEventListener('click', pastSearchHandler);
 }
 
@@ -128,6 +139,16 @@ function searchApi(cityName) {
             printCurrentResults(currentWData.results);
         }
     })
+
+    var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q={cityName}&limit=1&appid={APIKey}';
+
+    fetch(forecastUrl)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            pushForecast(data);
+        })
 }
 
 function printCurrentResults (data) {
@@ -155,3 +176,20 @@ function searchFormSubmit(event) {
 }
 
 submitBtn.addEventListener('submit', searchFormSubmit);
+
+function init () {
+    var savedHistory = JSON.parse(localStorage.getItem("city"));
+
+    if (savedHistory !== null) {
+        previousSearch = savedHistory;
+    }
+    pushHistoryBtnOnLoad();
+    resultContentEl.dataset.state = 'hidden';
+    resultdisplay();
+}
+
+function pushHistoryBtnOnLoad () {
+    for (var i = 0; i < previousSearch.length; i++) {
+        var 
+    }
+}
