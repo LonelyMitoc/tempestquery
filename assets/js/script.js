@@ -61,16 +61,18 @@ function printResults (resultObj) {
 function searchApi(cityName) {
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={APIKey}';
 
-    fetch(weatherUrl).then(function(response){
-        if (!response.ok) {
-            throw response.json();
-        }
+    fetch(weatherUrl)
+        .then(function(response){
+            if (!response.ok) {
+                alert('Please enter a valid city');
+                throw response.json();
+            }
 
         return response.json();
     })
     .then(function(weatherRes){
 
-        resultTextEl.textContent = weatherRes.search.cityName;
+        resultTextEl.textContent = weatherRes.cityName;
 
         console.log(weatherRes);
 
