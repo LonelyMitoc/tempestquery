@@ -36,12 +36,14 @@ var cityHistory = document.getElementById('search-history');
 var resultContentEl = document.getElementById('result-content');
 var resultTextEl = document.getElementById('result-text');
 
+// Current weather variables
 var today = document.getElementById('current-date');
 var currentTemp = document.getElementById('current-temp');
 var currentWind = document.getElementById('current-wind');
 var currentHumidity = document.getElementById('current-humidity');
 var currentIcon = document.getElementById('current-weather-icon');
 
+// Forecast weather variables
 var date1 = document.getElementById('date-1');
 var temp1 = document.getElementById('temp-1');
 var wind1 = document.getElementById('wind-1');
@@ -87,10 +89,17 @@ function pushCityHistory () {
     cityHistory.appendChild(newLi);
     newLi.appendChild(historyBtn);
     cityName = cityInput.value;
+    historyBtn.classList.add('btn', 'btn-secondary')
     previousSearch.push(cityName);
     historyBtn.textContent = cityName;
     localStorage.setItem("city", JSON.stringify(previousSearch));
     localStorage.getItem("city");
+    historyBtn.addEventListener('click', pastSearchHandler);
+}
+
+function pastSearchHandler(event) {
+    cityInput = event.target.textContent;
+    searchApi();
 }
 
 function searchApi(cityName) {
