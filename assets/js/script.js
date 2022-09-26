@@ -84,13 +84,11 @@ var previousSearch = [];
 var cityName;
 
 function pushCityHistory () {
-    // Create list and button element for the search history
-    var newLi = document.createElement('li');
+    // Create button element for the search history
     var historyBtn = document.createElement('button');
 
-    // Add the elements to the appropriate section
-    cityHistory.appendChild(newLi);
-    newLi.appendChild(historyBtn);
+    // Add the button to the Search History section
+    cityHistory.appendChild(historyBtn);
 
     // Set the values for the cityName to the input so we can add them to a previous search list
     cityName = cityInput.value;
@@ -98,11 +96,11 @@ function pushCityHistory () {
 
     // Replace the text on the button to the current cityName and add classes to the button
     historyBtn.textContent = cityName;
+    historyBtn.setAttribute('type', 'button');
     historyBtn.classList.add('btn', 'btn-secondary');
 
     // Save the cityName to local storage so we can pull it out later
     localStorage.setItem("city", JSON.stringify(previousSearch));
-    localStorage.getItem("city");
 
     // Eventlistener for the button
     historyBtn.addEventListener('click', pastSearchHandler);
@@ -136,7 +134,7 @@ function searchApi(cityName) {
             resultContentEl.innerHTML = '<h3>No results were found, please search again.</h3>';
         } else {
             resultContentEl.textContent = '';
-            printCurrentResults(currentWData.results);
+            printCurrentResults(currentWData);
         }
     })
 
@@ -162,6 +160,17 @@ function printCurrentResults (data) {
     currentIcon.setAttribute('src', currentIconURL);
 }
 
+function pushForecast(data) {
+    temp1.textContent = data.list[5].main.temp + '°F';
+    wind1.textContent = data.list[5].wind.speed + ' MPH';
+    humidity1.textContent = data.list[5].main.humidity + '%';
+    var iconID1 = data.list[5].weather[0].icon;
+    var iconUrl1 = 'https://openweathermap.org/img/w/' + iconID1 + '.png';
+    icon1.setAttribute('src', iconUrl1);
+
+
+}
+
 function searchFormSubmit(event) {
     event.preventDefault();
 
@@ -173,6 +182,7 @@ function searchFormSubmit(event) {
     }
 
     searchApi(searchInputVal);
+    pushCityHistory();
 }
 
 submitBtn.addEventListener('submit', searchFormSubmit);
@@ -185,11 +195,23 @@ function init () {
     }
     pushHistoryBtnOnLoad();
     resultContentEl.dataset.state = 'hidden';
-    resultdisplay();
+    resultDisplay();
 }
 
 function pushHistoryBtnOnLoad () {
     for (var i = 0; i < previousSearch.length; i++) {
-        var 
+        var pastSearchBtn = document.createElement('button');
+        pastSearchBtn.textContent = previousSearch[1];
+        pastSearchBtn.setAttribute('type', 'button');
+        pastSearchBtn.classList.add('btn', 'btn-secondary');
+        cityHistory.append(pastSearchBtn);
+    }
+}
+
+function resultDisplay () {
+    if (resultContentEl === 'hidden') {
+        resultContentEl.display = 'none';
+    } else {
+        resultContentEl.style.display = 'block';
     }
 }
