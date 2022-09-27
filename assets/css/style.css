@@ -39,9 +39,9 @@ body {
     background: var(--clr-neutral-100);
 }
 
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
 .text-primary-200 {
     color: var(--clr-primary-200);

@@ -25,9 +25,6 @@ perMinuteInterval();
 
 // API Information
 var APIKey = '8a622b07b60d853679b1d9c7d914148d';
-var rawCityData = {};
-var currentInfo = {};
-var futureInfo = {};
 
 // User Input and other variables
 var cityInput = document.getElementById('search-input');
@@ -85,16 +82,18 @@ var previousSearch = [];
 var cityName;
 
 function pushCityHistory () {
+    // Set the values for the cityName to the input so we can add them to a previous search list
+    cityName = cityInput.value;
+    if (previousSearch.includes(cityName)) {
+        return;
+    } else {
+    previousSearch.push(cityName);
+
     // Create button element for the search history
     var historyBtn = document.createElement('button');
 
     // Add the button to the Search History section
     cityHistory.appendChild(historyBtn);
-
-    // Set the values for the cityName to the input so we can add them to a previous search list
-    cityName = cityInput.value;
-    previousSearch.push(cityName);
-
     // Replace the text on the button to the current cityName and add classes to the button
     historyBtn.textContent = cityName;
     historyBtn.setAttribute('type', 'button');
@@ -105,11 +104,13 @@ function pushCityHistory () {
 
     // Eventlistener for the button
     historyBtn.addEventListener('click', pastSearchHandler);
+    }
 }
 
 function pastSearchHandler(event) {
     cityInput = event.target.textContent;
-    searchApi();
+    console.log(event.target);
+    searchApi(cityInput);
 }
 
 function searchApi(cityName) {
@@ -126,7 +127,7 @@ function searchApi(cityName) {
     })
     .then(function(data){
 
-        resultTextEl.textContent = data.cityName;
+        resultTextEl.textContent = data.name;
 
         console.log(data);
 
@@ -156,9 +157,9 @@ function searchApi(cityName) {
 function printCurrentResults (data) {
     console.log(data);
     today.textContent = moment().format('MM/DD/YYYY');
-    currentTemp.textContent = data.main.temp + '°F'
-    currentWind.textContent = data.wind.speed + ' MPH';
-    currentHumidity.textContent = data.main.humidity + '%';
+    currentTemp.textContent = 'Temp: ' + data.main.temp + '°F'
+    currentWind.textContent = 'Wind: ' + data.wind.speed + ' MPH';
+    currentHumidity.textContent = 'Humidity: ' + data.main.humidity + '%';
     var currentIconID = data.weather[0].icon;
     var currentIconURL = 'https://openweathermap.org/img/w/' + currentIconID + '.png';
     currentIcon.setAttribute('src', currentIconURL);
@@ -166,46 +167,44 @@ function printCurrentResults (data) {
 
 function pushForecast(data) {
     // Data for forecast date1
-    temp1.textContent = data.list[5].main.temp + '°F';
-    wind1.textContent = data.list[5].wind.speed + ' MPH';
-    humidity1.textContent = data.list[5].main.humidity + '%';
+    temp1.textContent = 'Temp: ' + data.list[5].main.temp + '°F';
+    wind1.textContent = 'Wind: ' + data.list[5].wind.speed + ' MPH';
+    humidity1.textContent = 'Humidity: ' + data.list[5].main.humidity + '%';
     var iconID1 = data.list[5].weather[0].icon;
     var iconUrl1 = 'https://openweathermap.org/img/w/' + iconID1 + '.png';
     icon1.setAttribute('src', iconUrl1);
     
     // Data for forecast date2
-    temp2.textContent = data.list[13].main.temp + '°F';
-    wind2.textContent = data.list[13].wind.speed + ' MPH';
-    humidity2.textContent = data.list[13].main.humidity + '%';
+    temp2.textContent = 'Temp: ' + data.list[13].main.temp + '°F';
+    wind2.textContent = 'Wind: ' + data.list[13].wind.speed + ' MPH';
+    humidity2.textContent = 'Humidity: ' + data.list[13].main.humidity + '%';
     var iconID2 = data.list[13].weather[0].icon;
     var iconUrl2 = 'https://openweathermap.org/img/w/' + iconID2 + '.png';
     icon2.setAttribute('src', iconUrl2);
 
     // Data for forecast date3
-    temp3.textContent = data.list[21].main.temp + '°F';
-    wind3.textContent = data.list[21].wind.speed + ' MPH';
-    humidity3.textContent = data.list[21].main.humidity + '%';
+    temp3.textContent = 'Temp: ' + data.list[21].main.temp + '°F';
+    wind3.textContent = 'Wind: ' + data.list[21].wind.speed + ' MPH';
+    humidity3.textContent = 'Humidity: ' + data.list[21].main.humidity + '%';
     var iconID3 = data.list[21].weather[0].icon;
     var iconUrl3 = 'https://openweathermap.org/img/w/' + iconID3 + '.png';
     icon3.setAttribute('src', iconUrl3);
 
     // Data for forecast date4
-    temp4.textContent = data.list[29].main.temp + '°F';
-    wind4.textContent = data.list[29].wind.speed + ' MPH';
-    humidity4.textContent = data.list[29].main.humidity + '%';
+    temp4.textContent = 'Temp: ' + data.list[29].main.temp + '°F';
+    wind4.textContent = 'Wind: ' + data.list[29].wind.speed + ' MPH';
+    humidity4.textContent = 'Humidity: ' + data.list[29].main.humidity + '%';
     var iconID4 = data.list[29].weather[0].icon;
     var iconUrl4 = 'https://openweathermap.org/img/w/' + iconID4 + '.png';
     icon4.setAttribute('src', iconUrl4);
 
     // Data for forecast date5
-    temp5.textContent = data.list[37].main.temp + '°F';
-    wind5.textContent = data.list[37].wind.speed + ' MPH';
-    humidity5.textContent = data.list[37].main.humidity + '%';
+    temp5.textContent = 'Temp: ' + data.list[37].main.temp + '°F';
+    wind5.textContent = 'Wind: ' + data.list[37].wind.speed + ' MPH';
+    humidity5.textContent = 'Humidity: ' + data.list[37].main.humidity + '%';
     var iconID5 = data.list[37].weather[0].icon;
     var iconUrl5 = 'https://openweathermap.org/img/w/' + iconID5 + '.png';
     icon5.setAttribute('src', iconUrl5);
-
-    resultTextEl.textContent = searchInputVal;
 }
 
 function searchFormSubmit(event) {
@@ -236,12 +235,19 @@ function init () {
 
 function pushHistoryBtnOnLoad () {
     for (var i = 0; i < previousSearch.length; i++) {
+        if(!previousSearch[i]) {
+            previousSearch.splice([i]);
+            localStorage.setItem('city', JSON.stringify(previousSearch));
+        } else {
+        
         var pastSearchBtn = document.createElement('button');
-        pastSearchBtn.textContent = previousSearch[1];
+        pastSearchBtn.textContent = previousSearch[i];
         pastSearchBtn.setAttribute('type', 'button');
-        pastSearchBtn.classList.add('btn', 'btn-secondary', 'p-2', 'bg-btn-400');
+        pastSearchBtn.classList.add('btn', 'btn-secondary', 'p-2', 'bg-btn-400', 'mt-2');
         cityHistory.append(pastSearchBtn);
+        pastSearchBtn.addEventListener('click', pastSearchHandler);
     }
+}
 }
 
 function resultDisplay () {
