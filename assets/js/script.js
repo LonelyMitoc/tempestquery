@@ -74,6 +74,7 @@ var wind5 = document.getElementById('wind-5');
 var humidity5 = document.getElementById('humidity-5');
 var icon5 = document.getElementById('icon-5');
 
+today.textContent = moment().format('MM/DD/YYYY');
 date1.textContent = moment().add(1, 'days').format('MM/DD/YYYY');
 date2.textContent = moment().add(2, 'days').format('MM/DD/YYYY');
 date3.textContent = moment().add(3, 'days').format('MM/DD/YYYY');
@@ -97,7 +98,7 @@ function pushCityHistory () {
     // Replace the text on the button to the current cityName and add classes to the button
     historyBtn.textContent = cityName;
     historyBtn.setAttribute('type', 'button');
-    historyBtn.classList.add('btn', 'btn-secondary');
+    historyBtn.classList.add('btn', 'btn-secondary mt-2');
 
     // Save the cityName to local storage so we can pull it out later
     localStorage.setItem("city", JSON.stringify(previousSearch));
@@ -185,7 +186,7 @@ function searchFormSubmit(event) {
     pushCityHistory();
 }
 
-submitBtn.addEventListener('submit', searchFormSubmit);
+submitBtn.addEventListener('click', searchFormSubmit);
 
 function init () {
     var savedHistory = JSON.parse(localStorage.getItem("city"));
@@ -203,7 +204,7 @@ function pushHistoryBtnOnLoad () {
         var pastSearchBtn = document.createElement('button');
         pastSearchBtn.textContent = previousSearch[1];
         pastSearchBtn.setAttribute('type', 'button');
-        pastSearchBtn.classList.add('btn', 'btn-secondary');
+        pastSearchBtn.classList.add('btn', 'btn-secondary', 'mt-2');
         cityHistory.append(pastSearchBtn);
     }
 }
@@ -215,3 +216,5 @@ function resultDisplay () {
         resultContentEl.style.display = 'block';
     }
 }
+
+init ();
