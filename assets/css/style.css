@@ -142,6 +142,7 @@ body {
 
 .btn {
     width: 100%;
+    /* height: ; */
 }
 
 .current-weather-section, .fwcards {
