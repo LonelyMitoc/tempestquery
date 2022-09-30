@@ -9,14 +9,14 @@ function renderDateTime() {
 };
 
 // Update the displayed date and time every minute
-function perMinuteInterval () {
+function perMinuteInterval() {
     var currentSeconds = new Date().getSeconds();
     if (currentSeconds == 0) {
         setInterval(renderDateTime, 60000);
     } else {
-        setTimeout(function() {
+        setTimeout(function () {
             perMinuteInterval();
-        }, (60000 - currentSeconds*1000));
+        }, (60000 - currentSeconds * 1000));
     }
     renderDateTime();
 };
@@ -82,7 +82,7 @@ date5.textContent = moment().add(5, 'days').format('MM/DD/YYYY');
 var previousSearch = [];
 var cityName;
 
-function pushCityHistory () {
+function pushCityHistory() {
     // Set the values for the cityName to the input so we can add them to a previous search list
     cityName = cityInput.value;
 
@@ -103,7 +103,7 @@ function pushCityHistory () {
 
     // Eventlistener for the button
     historyBtn.addEventListener('click', pastSearchHandler);
-    
+
 }
 
 // Action triggered after clicking the rendered history buttons
@@ -118,48 +118,48 @@ function searchApi(cityName) {
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + APIKey;
 
     fetch(weatherUrl)
-        .then(function(response){
+        .then(function (response) {
             // Alerts when an invalid city is entered
             if (!response.ok) {
                 alert('Please enter a valid city');
                 throw response.json();
             }
 
-        return response.json();
-    })
-    .then(function(data){
+            return response.json();
+        })
+        .then(function (data) {
 
-        // Fill the results heading with the city name
-        resultTextEl.textContent = data.name;
+            // Fill the results heading with the city name
+            resultTextEl.textContent = data.name;
 
-        console.log(data);
+            console.log(data);
 
-        // If there is no data, an error message shows
-        if (data.length == 0) {
-            console.log('No results found!');
-            resultContentEl.innerHTML = '<h3>No results were found, please search again.</h3>';
-        } else {
-            // If there are results, first clear the previous text content and print the results
-            resultContentEl.textContent = '';
-            printCurrentResults(data);
-            
-            // If statement to check if the search target has already been searched before
-            if (previousSearch.includes(cityName)) {
-                return;
+            // If there is no data, an error message shows
+            if (data.length == 0) {
+                console.log('No results found!');
+                resultContentEl.innerHTML = '<h3>No results were found, please search again.</h3>';
             } else {
-                // If the target has not been searched, then create a button in the history list
-                pushCityHistory();
+                // If there are results, first clear the previous text content and print the results
+                resultContentEl.textContent = '';
+                printCurrentResults(data);
+
+                // If statement to check if the search target has already been searched before
+                if (previousSearch.includes(cityName)) {
+                    return;
+                } else {
+                    // If the target has not been searched, then create a button in the history list
+                    pushCityHistory();
+                }
+
             }
-        
-        }
-    })
+        })
 
     // API URL for forecast weather
     var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&limit=1&appid=' + APIKey;
 
     // Fetch forecast
     fetch(forecastUrl)
-        .then(function(response){
+        .then(function (response) {
             // Terminate fetch if the search target is an invalid city
             if (!response.ok) {
                 throw response.json();
@@ -167,12 +167,13 @@ function searchApi(cityName) {
 
             return response.json();
         })
-        .then(function(data){
+        .then(function (data) {
             pushForecast(data);
         })
 }
 
-function printCurrentResults (data) {
+// Print the current weather to the HTML
+function printCurrentResults(data) {
     console.log(data);
     today.textContent = moment().format('MM/DD/YYYY');
     currentTemp.textContent = 'Temp: ' + data.main.temp + '°F'
@@ -183,6 +184,7 @@ function printCurrentResults (data) {
     currentIcon.setAttribute('src', currentIconURL);
 }
 
+// Print the 5-day forecast to the HTML
 function pushForecast(data) {
     // Data for forecast date1
     temp1.textContent = 'Temp: ' + data.list[5].main.temp + '°F';
@@ -191,7 +193,7 @@ function pushForecast(data) {
     var iconID1 = data.list[5].weather[0].icon;
     var iconUrl1 = 'https://openweathermap.org/img/w/' + iconID1 + '.png';
     icon1.setAttribute('src', iconUrl1);
-    
+
     // Data for forecast date2
     temp2.textContent = 'Temp: ' + data.list[13].main.temp + '°F';
     wind2.textContent = 'Wind: ' + data.list[13].wind.speed + ' MPH';
@@ -227,12 +229,13 @@ function pushForecast(data) {
     resultsContainerEl.classList.remove('hidden');
 }
 
+// Search button function
 function searchFormSubmit(event) {
     event.preventDefault();
 
     var searchInputVal = document.getElementById('search-input').value;
 
-    if(!searchInputVal) {
+    if (!searchInputVal) {
         alert('Please enter a valid city name to search');
         return;
     }
@@ -240,9 +243,11 @@ function searchFormSubmit(event) {
     searchApi(searchInputVal);
 }
 
+// Search button trigger on click
 submitBtn.addEventListener('click', searchFormSubmit);
 
-function init () {
+// Initial webpage load actions (read local storage and trigger history button creation)
+function init() {
     var savedHistory = JSON.parse(localStorage.getItem("city"));
 
     if (savedHistory !== null) {
@@ -251,21 +256,22 @@ function init () {
     pushHistoryBtnOnLoad();
 }
 
-function pushHistoryBtnOnLoad () {
+// Print history button based off local storage information
+function pushHistoryBtnOnLoad() {
     for (var i = 0; i < previousSearch.length; i++) {
-        if(!previousSearch[i]) {
+        if (!previousSearch[i]) {
             previousSearch.splice([i]);
             localStorage.setItem('city', JSON.stringify(previousSearch));
         } else {
-        
-        var pastSearchBtn = document.createElement('button');
-        pastSearchBtn.textContent = previousSearch[i];
-        pastSearchBtn.setAttribute('type', 'button');
-        pastSearchBtn.classList.add('btn', 'btn-secondary', 'p-2', 'bg-btn-400', 'mt-2');
-        cityHistory.append(pastSearchBtn);
-        pastSearchBtn.addEventListener('click', pastSearchHandler);
+
+            var pastSearchBtn = document.createElement('button');
+            pastSearchBtn.textContent = previousSearch[i];
+            pastSearchBtn.setAttribute('type', 'button');
+            pastSearchBtn.classList.add('btn', 'btn-secondary', 'p-2', 'bg-btn-400', 'mt-2');
+            cityHistory.append(pastSearchBtn);
+            pastSearchBtn.addEventListener('click', pastSearchHandler);
+        }
     }
 }
-}
 
-init ();
+init();
