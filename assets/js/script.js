@@ -32,6 +32,7 @@ var submitBtn = document.getElementById('search-btn');
 var cityHistory = document.getElementById('search-history');
 var resultContentEl = document.getElementById('result-content');
 var resultTextEl = document.getElementById('result-text');
+var resultsContainerEl = document.getElementById('results-container');
 
 // Current weather variables
 var today = document.getElementById('current-date');
@@ -84,9 +85,7 @@ var cityName;
 function pushCityHistory () {
     // Set the values for the cityName to the input so we can add them to a previous search list
     cityName = cityInput.value;
-    if (previousSearch.includes(cityName)) {
-        return;
-    } else {
+
     previousSearch.push(cityName);
 
     // Create button element for the search history
@@ -97,19 +96,18 @@ function pushCityHistory () {
     // Replace the text on the button to the current cityName and add classes to the button
     historyBtn.textContent = cityName;
     historyBtn.setAttribute('type', 'button');
-    historyBtn.classList.add('btn', 'btn-secondary', 'mt-2');
+    historyBtn.classList.add('btn', 'btn-secondary', 'p-2', 'bg-btn-400', 'mt-2');
 
     // Save the cityName to local storage so we can pull it out later
     localStorage.setItem("city", JSON.stringify(previousSearch));
 
     // Eventlistener for the button
     historyBtn.addEventListener('click', pastSearchHandler);
-    }
+    
 }
 
 function pastSearchHandler(event) {
     cityInput = event.target.textContent;
-    console.log(event.target);
     searchApi(cityInput);
 }
 
@@ -137,9 +135,14 @@ function searchApi(cityName) {
         } else {
             resultContentEl.textContent = '';
             printCurrentResults(data);
+            // cityName = cityInput.value;
+            
+        if (previousSearch.includes(cityInput)) {
+            return;
+        } else {
             pushCityHistory();
-            resultContentEl.dataset.state = 'shown';
-            resultDisplay();
+        }
+        
         }
     })
 
@@ -205,6 +208,8 @@ function pushForecast(data) {
     var iconID5 = data.list[37].weather[0].icon;
     var iconUrl5 = 'https://openweathermap.org/img/w/' + iconID5 + '.png';
     icon5.setAttribute('src', iconUrl5);
+
+    resultsContainerEl.classList.remove('hidden');
 }
 
 function searchFormSubmit(event) {
@@ -229,8 +234,6 @@ function init () {
         previousSearch = savedHistory;
     }
     pushHistoryBtnOnLoad();
-    resultContentEl.dataset.state = 'hidden';
-    resultDisplay();
 }
 
 function pushHistoryBtnOnLoad () {
@@ -248,14 +251,6 @@ function pushHistoryBtnOnLoad () {
         pastSearchBtn.addEventListener('click', pastSearchHandler);
     }
 }
-}
-
-function resultDisplay () {
-    if (resultContentEl === 'hidden') {
-        resultContentEl.display = 'none';
-    } else {
-        resultContentEl.style.display = 'block';
-    }
 }
 
 init ();
