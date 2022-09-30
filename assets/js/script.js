@@ -108,8 +108,8 @@ function pushCityHistory () {
 
 // Action triggered after clicking the rendered history buttons
 function pastSearchHandler(event) {
-    cityInput = event.target.textContent;
-    searchApi(cityInput);
+    cityName = event.target.textContent;
+    searchApi(cityName);
 }
 
 // API fetch function
@@ -144,7 +144,7 @@ function searchApi(cityName) {
             printCurrentResults(data);
             
             // If statement to check if the search target has already been searched before
-            if (previousSearch.includes(cityInput)) {
+            if (previousSearch.includes(cityName)) {
                 return;
             } else {
                 // If the target has not been searched, then create a button in the history list
@@ -233,7 +233,7 @@ function searchFormSubmit(event) {
     var searchInputVal = document.getElementById('search-input').value;
 
     if(!searchInputVal) {
-        alert('Need city name to search');
+        alert('Please enter a valid city name to search');
         return;
     }
 
