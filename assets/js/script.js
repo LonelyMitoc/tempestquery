@@ -106,16 +106,20 @@ function pushCityHistory () {
     
 }
 
+// Action triggered after clicking the rendered history buttons
 function pastSearchHandler(event) {
     cityInput = event.target.textContent;
     searchApi(cityInput);
 }
 
+// API fetch function
 function searchApi(cityName) {
+    // API URL for current weather
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + APIKey;
 
     fetch(weatherUrl)
         .then(function(response){
+            // Alerts when an invalid city is entered
             if (!response.ok) {
                 alert('Please enter a valid city');
                 throw response.json();
@@ -125,31 +129,42 @@ function searchApi(cityName) {
     })
     .then(function(data){
 
+        // Fill the results heading with the city name
         resultTextEl.textContent = data.name;
 
         console.log(data);
 
+        // If there is no data, an error message shows
         if (data.length == 0) {
             console.log('No results found!');
             resultContentEl.innerHTML = '<h3>No results were found, please search again.</h3>';
         } else {
+            // If there are results, first clear the previous text content and print the results
             resultContentEl.textContent = '';
             printCurrentResults(data);
-            // cityName = cityInput.value;
             
-        if (previousSearch.includes(cityInput)) {
-            return;
-        } else {
-            pushCityHistory();
-        }
+            // If statement to check if the search target has already been searched before
+            if (previousSearch.includes(cityInput)) {
+                return;
+            } else {
+                // If the target has not been searched, then create a button in the history list
+                pushCityHistory();
+            }
         
         }
     })
 
+    // API URL for forecast weather
     var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&limit=1&appid=' + APIKey;
 
+    // Fetch forecast
     fetch(forecastUrl)
         .then(function(response){
+            // Terminate fetch if the search target is an invalid city
+            if (!response.ok) {
+                throw response.json();
+            }
+
             return response.json();
         })
         .then(function(data){
@@ -218,7 +233,7 @@ function searchFormSubmit(event) {
     var searchInputVal = document.getElementById('search-input').value;
 
     if(!searchInputVal) {
-        console.error('Need city name to search');
+        alert('Need city name to search');
         return;
     }
 
