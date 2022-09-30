@@ -12,11 +12,13 @@
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
+  <!-- Website header with time and date -->
   <header class="header | text-center pb-2">
     <h1>Weather Dashboard</h1>
     <p id="date-time" class="fw-bold fs-600"></p>
   </header>
 
+  <!-- Container for search bar and history buttons -->
   <div class="container">
     <div class="row">
       <div class="search-container | col-12 col-lg-3 p-2 mr-3">
@@ -33,9 +35,12 @@
 
       </div>
 
+      <!-- Results container -->
       <div id="results-container"class="col-12 col-lg-8 ms-auto p-2 hidden">
         <h2 class="text-neutral-900">Showing results for <span id="result-text"></span></h2>
         <div id="result-content" data-state ='hidden' class="hidden"></div>
+
+          <!-- Current weather section -->
           <section id="current-weather" class="current-weather-section | border border-dark my-2 p-2 fw-bold">
             <div class="current-weather-container">
               <h3 id="current-date"></h3>
@@ -46,6 +51,7 @@
             </div>
           </section>
 
+          <!-- 5-day forecast section-->
           <section id="future-weather" class="container">
             <div class="f-w-container | row gx-2">
               <div class="fwcards f-w-card-1 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
