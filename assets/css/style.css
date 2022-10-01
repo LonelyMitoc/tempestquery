@@ -142,7 +142,6 @@ body {
 
 .btn {
     width: 100%;
-    /* height: ; */
 }
 
 .current-weather-section, .fwcards {
@@ -157,4 +156,16 @@ body {
 
 .row {
     margin-right: -8%;
+}
+
+.search-container {
+    margin-left: 2%;
+}
+
+.results-container {
+    margin-right: 5%;
+}
+
+#current-weather {
+    width: 95%;
 }

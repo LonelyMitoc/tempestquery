@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
+
 <body>
   <!-- Website header with time and date -->
   <header class="header | text-center pb-2">
@@ -22,13 +24,16 @@
   <div class="container">
     <div class="row">
       <div class="search-container | col-12 col-lg-3 p-2 mr-3">
-        <h2 class="search-heading | text-neutral-900">Search By City</h2>
-        <form id="search-form">
-          <input id="search-input" class="form-input | form-control" type="text" placeholder="City Name" aria-label="input box for city name to search">
-          <div class="d-grid gap-2">
-            <button id="search-btn" class="btn btn-secondary | mt-1 bg-btn-400" type="button">Search</button>
-          </div>
-        </form>
+        <div>
+          <h2 class="search-heading | text-neutral-900">Search By City</h2>
+          <form id="search-form">
+            <input id="search-input" class="form-input | form-control" type="text" placeholder="City Name"
+              aria-label="input box for city name to search">
+            <div class="d-grid gap-2">
+              <button id="search-btn" class="btn btn-secondary | mt-1 bg-btn-400" type="button">Search</button>
+            </div>
+          </form>
+        </div>
         <hr>
 
         <div id="search-history"></div>
@@ -36,66 +41,66 @@
       </div>
 
       <!-- Results container -->
-      <div id="results-container"class="col-12 col-lg-8 ms-auto p-2 hidden">
+      <div id="results-container" class="col-12 col-lg-8 ms-auto p-2 mr-2 hidden">
         <h2 class="text-neutral-900">Showing results for <span id="result-text"></span></h2>
-        <div id="result-content" data-state ='hidden' class="hidden"></div>
+        <div id="result-content" data-state='hidden' class="hidden"></div>
 
-          <!-- Current weather section -->
-          <section id="current-weather" class="current-weather-section | border border-dark my-2 p-2 fw-bold">
-            <div class="current-weather-container">
-              <h3 id="current-date"></h3>
-              <img id="current-weather-icon"></img>
-              <p id="current-temp"></p>
-              <p id="current-wind"></p>
-              <p id="current-humidity"></p>
+        <!-- Current weather section -->
+        <section id="current-weather" class="current-weather-section | border border-dark my-2 p-2 fw-bold">
+          <div class="current-weather-container">
+            <h3 id="current-date"></h3>
+            <img id="current-weather-icon"></img>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+          </div>
+        </section>
+
+        <!-- 5-day forecast section-->
+        <section id="future-weather" class="container">
+          <div class="f-w-container | row gx-2">
+            <div class="fwcards f-w-card-1 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
+              <h4 id="date-1"></h4>
+              <img id="icon-1"></img>
+              <p id="temp-1"></p>
+              <p id="wind-1"></p>
+              <p id="humidity-1"></p>
             </div>
-          </section>
 
-          <!-- 5-day forecast section-->
-          <section id="future-weather" class="container">
-            <div class="f-w-container | row gx-2">
-              <div class="fwcards f-w-card-1 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
-                <h4 id="date-1"></h4>
-                <img id="icon-1"></img>
-                <p id="temp-1"></p>
-                <p id="wind-1"></p>
-                <p id="humidity-1"></p>
-              </div>
-
-              <div class="fwcards f-w-card-2 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
-                <h4 id="date-2"></h4>
-                <img id="icon-2"></img>
-                <p id="temp-2"></p>
-                <p id="wind-2"></p>
-                <p id="humidity-2"></p>
-              </div>
-
-              <div class="fwcards f-w-card-3 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
-                <h4 id="date-3"></h4>
-                <img id="icon-3"></img>
-                <p id="temp-3"></p>
-                <p id="wind-3"></p>
-                <p id="humidity-3"></p>
-              </div>
-
-              <div class="fwcards f-w-card-4 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
-                <h4 id="date-4"></h4>
-                <img id="icon-4"></img>
-                <p id="temp-4"></p>
-                <p id="wind-4"></p>
-                <p id="humidity-4"></p>
-              </div>
-
-              <div class="fwcards f-w-card-5 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
-                <h4 id="date-5"></h4>
-                <img id="icon-5"></img>
-                <p id="temp-5"></p>
-                <p id="wind-5"></p>
-                <p id="humidity-5"></p>
-              </div>
-
+            <div class="fwcards f-w-card-2 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
+              <h4 id="date-2"></h4>
+              <img id="icon-2"></img>
+              <p id="temp-2"></p>
+              <p id="wind-2"></p>
+              <p id="humidity-2"></p>
             </div>
-          </section>
+
+            <div class="fwcards f-w-card-3 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
+              <h4 id="date-3"></h4>
+              <img id="icon-3"></img>
+              <p id="temp-3"></p>
+              <p id="wind-3"></p>
+              <p id="humidity-3"></p>
+            </div>
+
+            <div class="fwcards f-w-card-4 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
+              <h4 id="date-4"></h4>
+              <img id="icon-4"></img>
+              <p id="temp-4"></p>
+              <p id="wind-4"></p>
+              <p id="humidity-4"></p>
+            </div>
+
+            <div class="fwcards f-w-card-5 | col-12 col-lg-2 border border-dark mr-3 p-2 fw-bold">
+              <h4 id="date-5"></h4>
+              <img id="icon-5"></img>
+              <p id="temp-5"></p>
+              <p id="wind-5"></p>
+              <p id="humidity-5"></p>
+            </div>
+
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -104,4 +109,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
