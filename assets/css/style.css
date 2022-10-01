@@ -165,3 +165,9 @@ body {
 #current-weather {
     width: 95%;
 }
+
+@media (max-width: 991px) {
+    .row {
+        width: 98%;
+    }
+}
