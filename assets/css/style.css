@@ -39,6 +39,10 @@ body {
     background: var(--clr-neutral-100);
 }
 
+h4 {
+    font-size: var(--fs-600);
+}
+
 .hidden {
     display: none;
 }
@@ -150,20 +154,25 @@ body {
     background: linear-gradient(148deg, var(--clr-primary-500) 50%, var(--clr-primary-200) 100%);
 }
 
+.f-w-container {
+    width: 100%;
+}
+
 .container {
     min-width: 100%;
 }
 
-.row {
+/* .row {
     margin-right: -8%;
-}
+} */
 
 .search-container {
     margin-left: 2%;
 }
 
 #current-weather {
-    width: 95%;
+    width: 93.8%;
+    /* margin-right: 6.2%; */
 }
 
 @media (max-width: 991px) {
